@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "seapped7b30d8": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

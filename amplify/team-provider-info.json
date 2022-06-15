@@ -1,0 +1,32 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-seapp-dev-230716-authRole",
+      "UnauthRoleArn": "arn:aws:iam::111098328594:role/amplify-seapp-dev-230716-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::111098328594:role/amplify-seapp-dev-230716-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-seapp-dev-230716-deployment",
+      "UnauthRoleName": "amplify-seapp-dev-230716-unauthRole",
+      "StackName": "amplify-seapp-dev-230716",
+      "StackId": "arn:aws:cloudformation:us-east-2:111098328594:stack/amplify-seapp-dev-230716/a4f2ecc0-ec08-11ec-8b2a-0261518c49c8",
+      "AmplifyAppId": "d2ryyxzuw9idwa"
+    },
+    "categories": {
+      "auth": {
+        "seapped7b30d8": {
+          "userPoolId": "us-east-2_kLOF5LiBE",
+          "userPoolName": "SE-Users",
+          "webClientId": "nqoa69tmnhjgrk7epqchali6m",
+          "nativeClientId": "nqoa69tmnhjgrk7epqchali6m",
+          "identityPoolId": "us-east-2:21b8b952-a6a6-4e9d-9df0-5509d63a836d",
+          "identityPoolName": "SE-POC-Users",
+          "allowUnauthenticatedIdentities": true,
+          "authRoleArn": "arn:aws:iam::111098328594:role/Cognito_SEPOCUsersAuth_Role",
+          "authRoleName": "Cognito_SEPOCUsersAuth_Role",
+          "unauthRoleArn": "arn:aws:iam::111098328594:role/Cognito_SEPOCUsersUnauth_Role",
+          "unauthRoleName": "Cognito_SEPOCUsersUnauth_Role"
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { Auth } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import { NgForm } from '@angular/forms';
 import { ViewChild} from '@angular/core';
 
@@ -29,28 +29,28 @@ export class SignUpComponent implements OnInit {
 
   onSignedIn(model){
 
-    // Auth.signUp({
-    //   "username": model.email,
-    //   "password": model.password ,
-    //   "attributes": {
-    //   "email": model.email,
-    //   "custom:FirstName" : model.firstName  ,
-    //   "custom:LastName" : model.lastName ,
-    //   "custom:DepartmentName" : model.departmentName,
-    //   "custom:ClientName" : model.clientName 
-    //   }
-    // })
-    // .then(data => {
-    //   console.log(data)
-    //   alert("Sign Up was successfull");
-    //   this.router.navigate(['login']);    
+    Auth.signUp({
+      "username": model.email,
+      "password": model.password ,
+      "attributes": {
+      "email": model.email,
+      "custom:FirstName" : model.firstName  ,
+      "custom:LastName" : model.lastName ,
+      "custom:DepartmentName" : model.departmentName,
+      "custom:ClientName" : model.clientName 
+      }
+    })
+    .then(data => {
+      console.log(data)
+      alert("Sign Up was successfull");
+      this.router.navigate(['login']);    
   
-    // })
-    // .catch((error: any) => {
+    })
+    .catch((error: any) => {
       
-    //   console.log(error);
+      console.log(error);
    
-    // })
+    })
     // this.router.navigate(['login']);
   }
 
