@@ -14,12 +14,12 @@ Amplify.configure({
     authenticationFlowType : 'USER_PASSWORD_AUTH',
     identityPoolId: 'us-west-1:aaf82052-64ab-4071-8acc-b5c4095b4621',
   },
-  // Storage: {
-  //   AWSS3: {
-  //       bucket: 'senewbucket91401-master', 
-  //       region: 'us-east-2', 
-  //   }
-  // }
+  Storage: {
+    AWSS3: {
+        bucket: 'seappbucket1', 
+        region: 'us-west-1', 
+    }
+  }
 });
 
 if (environment.production) {

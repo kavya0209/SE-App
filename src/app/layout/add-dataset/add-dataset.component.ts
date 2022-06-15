@@ -1,6 +1,6 @@
 import { Component, OnInit , ViewChild} from '@angular/core';
-// import { Storage } from "@aws-amplify/storage";
-// import { Auth } from 'aws-amplify';
+import { Storage } from "@aws-amplify/storage";
+import { Auth } from 'aws-amplify';
 // import { AmplifyS3Image } from "@aws-amplify/angular";
 
 @Component({
@@ -46,23 +46,23 @@ export class AddDatasetComponent implements OnInit {
 
 
   save(model : any){
-    // console.log(model);
-    // console.log(this.dataSetType1);
+    console.log(model);
+    console.log(this.dataSetType1);
 
-    // console.log(this.dataUploadFile);
-    // console.log(this.dataUploadFileType);
+    console.log(this.dataUploadFile);
+    console.log(this.dataUploadFileType);
 
-    //   Storage.put('SE-Datasets' +'/' + model.dataSetName + '/' + this.dataUploadFile, {
-    //   level: 'public',
-    //   contentType: this.dataUploadFileType
-    // }).then(data => {
-    //     alert("Data Uploaded Successfully");
-    //   }).catch((error: any) => {
+      Storage.put('SE-Datasets' +'/' + model.dataSetName + '/' + this.dataUploadFile, {
+      level: 'public',
+      contentType: this.dataUploadFileType
+    }).then(data => {
+        alert("Data Uploaded Successfully");
+      }).catch((error: any) => {
     
-    //       console.log(error);
+          console.log(error);
           
           
-        // })
+        })
   }
 
 
