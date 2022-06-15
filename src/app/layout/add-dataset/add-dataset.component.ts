@@ -16,7 +16,7 @@ export class AddDatasetComponent implements OnInit {
   dataSetType1 = '';
   dataSetType2 = '';
   dataSetName = '';
-  showDataSetType1 : boolean = true ;
+  showDataSetType1 : boolean = false ;
   showDataSetType2 : boolean = false ;
   @ViewChild('f') form: any;
 
@@ -44,25 +44,20 @@ export class AddDatasetComponent implements OnInit {
     this.dataUploadFileType = fileInput.target.files[0].type;
   }
 
-
   save(model : any){
-    console.log(model);
-    console.log(this.dataSetType1);
-
-    console.log(this.dataUploadFile);
-    console.log(this.dataUploadFileType);
-
-      Storage.put('SE-Datasets' +'/' + model.dataSetName + '/' + this.dataUploadFile, {
+  
+    Storage.put('SE-Datasets' +'/' + model.dataSetName + '/' + this.dataUploadFile, {
       level: 'public',
       contentType: this.dataUploadFileType
     }).then(data => {
+        
         alert("Data Uploaded Successfully");
+        this.form.reset();
+      
       }).catch((error: any) => {
     
-          console.log(error);
-          
-          
-        })
+        console.log(error);
+      })
   }
 
 

@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   email = '';
   password = '';
 
-
   constructor(
     private router: Router,
   ) { }
@@ -35,12 +34,8 @@ export class LoginComponent implements OnInit {
       
         this.cognitoUser.emit(data);
         this.router.navigate(['/layout']);
-      
-      
       })
       .catch((error: any) => {
-        
-       
         alert("Username or password is incorrect");
         this.router.navigate(['/login']);
       })

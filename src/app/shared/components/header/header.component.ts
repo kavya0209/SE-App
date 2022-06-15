@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { Auth } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 
 @Component({
   selector: 'app-header',
@@ -9,32 +9,36 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  firstname = '';
+
   constructor(private router: Router,) { }
 
   ngOnInit(): void {
-   
+  
+    Auth.currentAuthenticatedUser()
+    .then(user => {
+     
+      if(user.attributes['custom:FirstName']) {
+        this.firstname = user.attributes['custom:FirstName'] ;
+      }
+      else{
+        this.firstname = 'User' ;
+      }
+    })
+    .catch(err => console.log(err));
     
   }
 
-  logOut()
-  {
-    // console.log("logout called");
-    // Auth.signOut()
-    //   .then(data => {
-      
-     
-     
-      
-    //   this.router.navigate(['login']);
-     
-    //   })
-    //   .catch((error: any) => {
-
-    //   console.log("error");
-    //   console.log(error);
-      
-     
-    //   })
+  logOut(){
+  
+    Auth.signOut()
+      .then(data => {
+        this.router.navigate(['login']);
+      })
+      .catch((error: any) => {
+        console.log("error");
+        console.log(error);
+      })
   }
 
 }
