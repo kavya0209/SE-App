@@ -19,9 +19,10 @@ export class PredictionEngineComponent implements OnInit {
   datasetModel = '';
   dataset = '';
   resultData : any;
-  //  setS3DownloadLinks = [];
-  // s3DownloadLinks :any;
-
+  outputText = '';
+  downloadLink = '';
+  downloadLinkBool : boolean = false;
+ 
   @ViewChild('f') form: any;
 
   constructor(
@@ -29,8 +30,8 @@ export class PredictionEngineComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.downloadLinkBool);
     this.getDatasets();
-    // this.validationData();
   }
 
   getDatasets(){
@@ -52,20 +53,20 @@ export class PredictionEngineComponent implements OnInit {
       this.outputpath = '';
       this.predictionService.getPrediction().subscribe((result: { data: any[]; }) => {
         this.outputpath = result;
+        this.outputText = 'Validation file has been generated successfully .Please click on the download button to download the file';
+        
+        this.downloadLinkBool = false;
+        this.predictionService.getValidationData().subscribe((result) => {
+          this.downloadLinkBool = true;
+          this.downloadLink = result;
+          console.log(result);
+        });
+      
+      
       });
   }
 
-  validationData() {
-     
-      this.predictionService.getValidationData().subscribe((result: { data: any[]; }) => {
-       
-        this.resultData = result.data;
-        var resulttext = this.resultData.replaceAll('\\n', "],[");
-        var resulttext1 = resulttext.replace("b'", "[");
-        var array1 = resulttext1.split(",");
-      });
-  }
-
+  /*
   downloadReport(){
 
     var data = [['kavya' , 'AEG'],['Sumana','AEG'] ]
@@ -91,7 +92,7 @@ export class PredictionEngineComponent implements OnInit {
     alert("Transformers Nomination is downloaded.")
   }
    
-  
+*/  
 
   
 

@@ -38,15 +38,14 @@ export class PredictionsService {
 
   getValidationData(){
     
-    var url2 = 'https://u37yr57knc.execute-api.us-west-1.amazonaws.com/de/download'
+    var url2 = 'https://s81urjag6k.execute-api.us-west-1.amazonaws.com/default/myfunct'
     var bucketName = 'seappbucket1'
     var validation = 'sagemaker/data_dictionary/validation/validation.csv'
     return this.httpClient.get(
-      url2 + '?bucket=' + bucketName + '&key=' + validation
+      url2 + '?Bucket=' + bucketName + '&Key=' + validation
     )
       .pipe(
             map((response: any)=>{
-              
               return response;
             }),
             catchError(this.handleError)
@@ -56,30 +55,22 @@ export class PredictionsService {
   getDataTypeFormattedForDownload(data) {
 
     let fData = data.slice();
-
+    
     fData.forEach((obj, ind) => {
-
       if( obj instanceof Array ) {
-
         obj.forEach((val, vInd) => {
           obj[vInd] = this.getNumberFormat( val );
         });
-
       } else if( obj instanceof Object ) {
-
-        for(let key in obj) {
-          obj[key] = this.getNumberFormat( obj[key] );
-        }
-
+          for(let key in obj) {
+            obj[key] = this.getNumberFormat( obj[key] );
+          }
       } else {
-
-        fData[ind] = this.getNumberFormat( obj );
+          fData[ind] = this.getNumberFormat( obj );
 
       }
-
     });
 
-    // console.log(fData);
     return fData;
   }
 

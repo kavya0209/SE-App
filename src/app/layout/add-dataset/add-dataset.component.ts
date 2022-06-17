@@ -45,19 +45,24 @@ export class AddDatasetComponent implements OnInit {
   }
 
   save(model : any){
-  
-    Storage.put('SE-Datasets' +'/' + model.dataSetName + '/' + this.dataUploadFile, {
-      level: 'public',
-      contentType: this.dataUploadFileType
-    }).then(data => {
-        
-        alert("Data Uploaded Successfully");
-        this.form.reset();
+
+    if(model.dataSetName && this.dataUploadFile && this.dataSource){
+     
+      Storage.put('SE-Datasets' +'/' + model.dataSetName + '/' + this.dataUploadFile, {
+        level: 'public',
+        contentType: this.dataUploadFileType
+      }).then(data => {
+          alert("Data Uploaded Successfully");
+          this.form.reset();
+        }).catch((error: any) => {
       
-      }).catch((error: any) => {
-    
-        console.log(error);
-      })
+          console.log(error);
+        })
+    }
+    else{
+      alert("Please enter all fields");
+    }
+  
   }
 
 
