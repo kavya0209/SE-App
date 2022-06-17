@@ -36,6 +36,67 @@ export class PredictionsService {
       );
   }
 
+  getValidationData(){
+    
+    var url2 = 'https://u37yr57knc.execute-api.us-west-1.amazonaws.com/de/download'
+    var bucketName = 'seappbucket1'
+    var validation = 'sagemaker/data_dictionary/validation/validation.csv'
+    return this.httpClient.get(
+      url2 + '?bucket=' + bucketName + '&key=' + validation
+    )
+      .pipe(
+            map((response: any)=>{
+              
+              return response;
+            }),
+            catchError(this.handleError)
+      );
+  };
+
+  getDataTypeFormattedForDownload(data) {
+
+    let fData = data.slice();
+
+    fData.forEach((obj, ind) => {
+
+      if( obj instanceof Array ) {
+
+        obj.forEach((val, vInd) => {
+          obj[vInd] = this.getNumberFormat( val );
+        });
+
+      } else if( obj instanceof Object ) {
+
+        for(let key in obj) {
+          obj[key] = this.getNumberFormat( obj[key] );
+        }
+
+      } else {
+
+        fData[ind] = this.getNumberFormat( obj );
+
+      }
+
+    });
+
+    // console.log(fData);
+    return fData;
+  }
+
+  getNumberFormat(str){
+    let regex = new RegExp('^[-]{0,1}[0-9]+[.]{0,1}[0-9]*$');
+    let fStr = str;
+    if( regex.test(str) ) {
+      if( !isNaN( parseFloat(str) ) ) {
+        fStr = parseFloat(str);
+      }
+    }
+    return fStr;
+  }
+
+
+
+
 
 
 

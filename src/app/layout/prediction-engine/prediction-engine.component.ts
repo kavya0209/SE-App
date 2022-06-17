@@ -2,6 +2,10 @@ import { Component, OnInit , ViewChild } from '@angular/core';
 import { getDefaultFormatCodeSettings } from 'typescript';
 import { PredictionsService } from '../../shared/services/predictions.service';
 import { Storage } from "@aws-amplify/storage";
+import { API } from 'aws-amplify'
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { utils, write, WorkBook } from 'xlsx';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-prediction-engine',
@@ -11,8 +15,12 @@ import { Storage } from "@aws-amplify/storage";
 export class PredictionEngineComponent implements OnInit {
 
   folderNames = [];
+  outputpath : any;
   datasetModel = '';
   dataset = '';
+  resultData : any;
+  //  setS3DownloadLinks = [];
+  // s3DownloadLinks :any;
 
   @ViewChild('f') form: any;
 
@@ -22,6 +30,7 @@ export class PredictionEngineComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDatasets();
+    // this.validationData();
   }
 
   getDatasets(){
@@ -40,11 +49,78 @@ export class PredictionEngineComponent implements OnInit {
   }
 
   save(){
-   
-    //   this.predictionService.getPrediction().subscribe((result: { data: any[]; }) => {
-    //   console.log(result);
-    // });
-   
+      this.outputpath = '';
+      this.predictionService.getPrediction().subscribe((result: { data: any[]; }) => {
+        this.outputpath = result;
+      });
   }
+
+  validationData() {
+     
+      this.predictionService.getValidationData().subscribe((result: { data: any[]; }) => {
+       
+        this.resultData = result.data;
+        var resulttext = this.resultData.replaceAll('\\n', "],[");
+        var resulttext1 = resulttext.replace("b'", "[");
+        var array1 = resulttext1.split(",");
+      });
+  }
+
+  downloadReport(){
+
+    var data = [['kavya' , 'AEG'],['Sumana','AEG'] ]
+    // var objdata = JSON.parse(JSON.stringify(data));
+    
+    const ws_name = 'Nominations';
+    const wb: WorkBook = { SheetNames: [], Sheets: {} };
+    const ws: any = utils.json_to_sheet(this.predictionService.getDataTypeFormattedForDownload(data));
+    wb.SheetNames.push(ws_name);
+    wb.Sheets[ws_name] = ws;
+    const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+    var s2ab = function (s) {
+      const buf = new ArrayBuffer(s.length);
+      const view = new Uint8Array(buf);
+      for (let i = 0; i !== s.length; ++i) {
+        view[i] = s.charCodeAt(i) & 0xFF;
+      };
+      return buf;
+    }
+    // var nowTime = this.globals.getFullDateTime(new Date());
+    var downloadFileName = `Nominations.xlsx`;
+    saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), downloadFileName);
+    alert("Transformers Nomination is downloaded.")
+  }
+   
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

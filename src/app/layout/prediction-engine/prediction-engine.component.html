@@ -21,13 +21,15 @@
     </form>
 </div>
 <div class="row">
-    <div class="col-6">
+    <div class="col-6" class="run-button-css">
         <button type="submit" (click)="save()" class="btn  btn-primary  button-color button-css" > RUN </button>
     </div>
 </div>
 <div class="row">
     <div class="col-4">
-        <span class="heading-css">{{"filename"}}</span>
+        <span class="heading-css">{{ this.outputpath}}</span>
+        <!-- <button type="button" (click)="downloadReport()" class="btn  btn-primary  button-color button-css" > SAVE </button> -->
+        <!-- <a href="link 1" target="_blank" download=""> -->
         <!-- <form novalidate>
             <div class="form-group">
                 <span class="label-css">Modelling Techniques</span>
