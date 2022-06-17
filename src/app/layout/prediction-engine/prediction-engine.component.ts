@@ -50,20 +50,24 @@ export class PredictionEngineComponent implements OnInit {
   }
 
   save(){
-      this.outputpath = '';
+
+    this.outputpath = '';
+    this.downloadLinkBool = false;
+    if(this.dataset && this.datasetModel){
       this.predictionService.getPrediction().subscribe((result: { data: any[]; }) => {
         this.outputpath = result;
         this.outputText = 'Validation file has been generated successfully .Please click on the download button to download the file';
         
-        this.downloadLinkBool = false;
         this.predictionService.getValidationData().subscribe((result) => {
           this.downloadLinkBool = true;
           this.downloadLink = result;
           console.log(result);
         });
-      
-      
       });
+    }
+    else{
+      alert("Please enter all fields");
+    }
   }
 
   /*
