@@ -7,9 +7,10 @@ import { HeaderComponent } from '../shared/components/header/header.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { PredictionEngineComponent } from './prediction-engine/prediction-engine.component';
+import { DynamicSafetyStockComponent } from './dynamic-safety-stock/dynamic-safety-stock.component';
 
 @NgModule({
-  declarations: [LayoutComponent, AddDatasetComponent,HeaderComponent, PredictionEngineComponent],
+  declarations: [LayoutComponent, AddDatasetComponent,HeaderComponent, PredictionEngineComponent, DynamicSafetyStockComponent],
   imports: [
     CommonModule,
     LayoutRoutingModule,

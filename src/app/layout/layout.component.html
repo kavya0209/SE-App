@@ -16,6 +16,12 @@
                             <app-prediction-engine></app-prediction-engine>
                         </ng-template>
                     </li>
+                    <li [ngbNavItem]="'dynamic-safet-stock'">
+                        <a ngbNavLink>DYNAMIC SAFETY STOCK</a>
+                        <ng-template ngbNavContent>
+                            <app-dynamic-safety-stock></app-dynamic-safety-stock>
+                        </ng-template>
+                    </li>
                 </ul>
                 <div [ngbNavOutlet]="nav" class="mt-2"></div>
             </div>
